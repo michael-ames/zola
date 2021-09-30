@@ -101,7 +101,7 @@ fn fix_link(
     // - it could be a relative link (starting with `@/`)
     // - it could be a link to a co-located asset
     // - it could be a normal link
-    let result = if link.starts_with("@/") {
+    let result = if link.starts_with("./") {
         match resolve_internal_link(link, &context.permalinks) {
             Ok(resolved) => {
                 internal_links.push((resolved.md_path, resolved.anchor));
