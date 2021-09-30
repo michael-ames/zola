@@ -410,7 +410,7 @@ fn can_make_valid_relative_link() {
         InsertAnchor::None,
     );
     let res = render_content(
-        r#"[rel link](@/pages/about.md), [abs link](https://vincent.is/about)"#,
+        r#"[rel link](./pages/about.md), [abs link](https://vincent.is/about)"#,
         &context,
     )
     .unwrap();
@@ -434,7 +434,7 @@ fn can_make_relative_links_with_anchors() {
         &permalinks,
         InsertAnchor::None,
     );
-    let res = render_content(r#"[rel link](@/pages/about.md#cv)"#, &context).unwrap();
+    let res = render_content(r#"[rel link](./pages/about.md#cv)"#, &context).unwrap();
 
     assert!(res.body.contains(r#"<p><a href="https://vincent.is/about#cv">rel link</a></p>"#));
 }
@@ -452,7 +452,7 @@ fn errors_relative_link_inexistant() {
         &permalinks_ctx,
         InsertAnchor::None,
     );
-    let res = render_content("[rel link](@/pages/about.md)", &context);
+    let res = render_content("[rel link](./pages/about.md)", &context);
     assert!(res.is_err());
 }
 
@@ -914,7 +914,7 @@ fn can_make_valid_relative_link_in_heading() {
         &permalinks,
         InsertAnchor::None,
     );
-    let res = render_content(r#" # [rel link](@/pages/about.md)"#, &context).unwrap();
+    let res = render_content(r#" # [rel link](./pages/about.md)"#, &context).unwrap();
 
     assert_eq!(
         res.body,
